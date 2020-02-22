@@ -5,6 +5,7 @@ import com.springBootTemel.demo.service.impl.ProjectServiceImpl;
 import com.springBootTemel.demo.util.ApiPaths;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(ApiPaths.ProjectCtrl.CTRL)
 @Api(value =ApiPaths.ProjectCtrl.CTRL,description = "PROJECT APIs")
+@Slf4j
 public class ProjectController {
 
 
@@ -26,6 +28,10 @@ public class ProjectController {
     @GetMapping("/{id}")
     @ApiOperation(value = "Get By Id Operation", response = ProjectDto.class)
     public ResponseEntity<ProjectDto> getById(@PathVariable(value = "id", required = true) Long id) {
+        log.info("ProjectController -> GetById -> Param:" +id);
+
+        log.debug("ProjectController -> GetById -> Param:" +id);
+
         ProjectDto projectDto = projectServiceImpl.getById(id);
         return ResponseEntity.ok(projectDto);
     }
